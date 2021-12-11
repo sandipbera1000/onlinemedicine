@@ -195,26 +195,31 @@ if(isset($_POST['submit'])){
     echo "<br><br>";
     */
 
-    if($passwd >=8 and $passwd <= 15){
+    if((strlen($passwd) > 7) and (strlen($passwd) < 16)){
+
+        $sql="INSERT into registration(name,gender,email,password) values('$name1','$gender','$email','$passwd')";
+        $q=mysqli_query($conn,$sql);
     
-    $sql="INSERT into registration(name,gender,email,password) values('$name1','$gender','$email','$passwd')";
-    $q=mysqli_query($conn,$sql);
+         if(!$sql){
+             echo(mysqli_error($conn));
+    
+         }
+         else{
+        echo "Data Submited Succsessfully-----";
+        echo "<br><br>";
+        echo "<br><br>";
+         }
 
-
-    echo "Data Submited Succsessfully-----";
-    echo "<br><br>";
-    echo "<br><br>";
     }
-    else{ 
-        echo "<br><br>";
-        echo "<br><br>";
-        echo "------Password Lenth Should Be Greater Than 8 character and less then 15 character-------- ";
-        echo "<br><br>";
-        echo "<br><br>";
-        echo "<br><br>";
+    else{
+        echo "----Enter Password lenth Greater Than 8 character and less then 15 character----";
     }
     
+   
 
+    
+    
+   
 
     mysqli_close($conn);
 
